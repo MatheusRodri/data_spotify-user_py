@@ -2,7 +2,6 @@
 
 O projeto se resume em analisar os dados da minha conta do Spotify ( Fique a vontade para replicar com suas informações )
 Até o momento em que escrevo esse readme, ainda não tenho uma ideia do objetivo final.
-Teste
 
 ## Requisitos
 
