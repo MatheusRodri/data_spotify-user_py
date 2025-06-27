@@ -17,4 +17,4 @@ Até o momento em que escrevo esse readme, ainda não tenho uma ideia do objetiv
 - Baixe seus dados dao spotify
 - Coloque os arquivos em suas respectivos nomes
 - Entre no arquivo arquivo `main`
-- Execute por completo
+- Execute o arquivo por completo
