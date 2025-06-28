@@ -5,7 +5,7 @@ Até o momento em que escrevo esse readme, ainda não tenho uma ideia do objetiv
 
 ## Requisitos
 
-- Dados da sua conta do spotify
+- Dados da sua conta e histórico entendido do spotify
 - Databricks
 - PowerBI
 
