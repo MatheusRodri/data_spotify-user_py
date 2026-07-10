@@ -1,78 +1,87 @@
 # 🎧 Spotify Data Monitor & Analytics
 
-- 🔁 Last Update: 12/04/2026
-- 🚀 Deploy: [Dashboard](https://app.powerbi.com/view?r=eyJrIjoiOGIzMjI2NWEtNjIxNS00MGYxLTg0MGYtZTkzY2Y4YmQzNGU0IiwidCI6ImU5MDVhOGVjLTdkNGQtNGM4Ny1iNzY4LTdlMzQzNjkyMmVjNiJ9)
+[![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://www.python.org/)
+[![Apache Spark](https://img.shields.io/badge/apache_spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)](https://spark.apache.org/)
+[![Databricks](https://img.shields.io/badge/Databricks-FF3621?style=for-the-badge&logo=Databricks&logoColor=white)](https://databricks.com/)
+[![Power Bi](https://img.shields.io/badge/power_bi-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
 
+## Table of Contents
 
-## 📋 Summary
+- [Context](#-context)
+- [Software features](#-software-features)
+- [Technologies and tools](#-technologies-and-tools)
+- [Architecture](#-architecture)
+- [Repository structure](#-repository-structure)
+- [Requirements](#-requirements)
+- [How to run](#-how-to-run)
+- [Autor](#-autor)
 
-- [📖 About project](#about-project)
-- [🛠️ Technologies used](#technologies-used)
-- [📋 Requirements](#requirements)
-- [🚀 How to run](#how-to-run)
-- [👨‍💻 Authors](#authors)
+# 📌 Context 
 
-## 📖 About Project <a id="about-project"></a>
+The project is an analytical dashboard focused on processing and visualizing your extended streaming history from Spotify. It is designed to run easily in the **Databricks** environment and is extremely simple to use (focused on beginners). Just import your personal data and see the magic happen through a detailed dashboard in Power BI, which displays your most played songs, favorite artists, total listening time, and much more.
 
-The project is a dashboard with data from my Spotify account ( Replicate with your information and see the magic ). Here you see how many songs you listened to, your top artists, how many minutes you listened to music, and much more. 
+## 🚀 Software features
 
-## 🛠️ Technologies used <a id="technologies-used"></a>
+- **Easy Data Ingestion**: Simply place your history files in the designated folder (`extended`).
+- **Automated Setup**: Environment configuration and table preparation by running a single notebook (`databricks.ipynb`).
+- **Ready Data Pipeline**: Extraction and transformation (ETL) of raw data using pre-configured notebooks (bronze and silver layers).
+- **Interactive Dashboard in Power BI**: Easy-to-view metrics in a Power BI template that connects directly to your data in the cloud.
 
-- Python 
-    - Spark
-    - Pandas
-- Power BI
+## 🛠️ Technologies and tools
 
+- **Language**: Python (PySpark and Pandas)
+- **Data Platform**: Databricks
+- **Visualization**: Power BI
 
-## 📋 Requirements <a id="requirements"></a>
+## 📋 Architecture
 
-- Data from your Spotify account and extended history of your Spotify account
-- PowerBI
-- Run local:
-    - Visual Studio Code or another code editor
-    - Python
-    - UV
-    - With you need a guide access: [UV and spark installation](https://github.com/MatheusRodri/doc-template-files/tree/main/pyspark/local)
-- Run in cloud:
-    - Databricks
+1. Raw JSON files (Extended streaming history from Spotify) are provided by the user.
+2. The Databricks environment processes the ingestion (Bronze layer) and transformation (Silver layer) of data via PySpark.
+3. Power BI connects to the Databricks cluster using the Server (Host) and HTTP Path (Path) parameters to consume and display the final data.
 
-## 🚀 How to run <a id="how-to-run"></a>
+## 📁 Repository structure
 
-- Request your Spotify data [here](https://www.spotify.com/account/privacy/)
-- Download your Spotify data
-- Run local:
-    - Clone the repository in your local machine
-    - Open the folder in your code editor
-    - Put the downloaded files in the `data\extended` folder
-    - In terminal, run the following command:
-        - `uv sync` to install the dependencies
-    - Run the `00-Ingestion`, `01-Transform` and `02-Gold` files
-    - Open the PowerBI
-    - Open the `dashboard_spotify_local.pbix` file
-    - In the initial page, click on `update` button
+```text
+├── data/
+│   └── extended/                    # Folder where Spotify JSON files should be placed
+├── notebooks/
+│   ├── history/                     # ETL Notebooks (Processing)
+│   │   ├── 01 - bronze_history_audio_user.ipynb
+│   │   ├── 02 - silver_history_audio_user.ipynb
+│   │   └── 03 - silver_history_only_audio_user.ipynb
+│   └── setup/                       # Configuration notebooks
+│       ├── databricks.ipynb         # Initial Databricks setup
+│       └── powerbi.ipynb            # Script to capture connection data for Power BI
+├── powerbi/
+│   ├── dashboard_spotify.pbix       # Main Power BI dashboard file
+│   └── resources/                   # Auxiliary resources and images
+├── .env.exemple
+├── .gitignore
+└── README.MD                        # Project documentation
+```
 
+## 📦 Requirements
 
+- Request your [Extended Streaming History from Spotify](https://www.spotify.com/account/privacy/).
+- A Databricks account with an active cluster (can be the Community Edition).
+- Power BI Desktop installed on your computer.
 
-- Upload the files in separate folder in Volumes
-    - If you not know how upload files, follow the steps:
-        - In the sidebar, click the Workspace icon
-        - Navigate to the directory where you want to create the new folder.
-        - Right-click on the parent folder's name or the main workspace area, and select Create > Folder.
-        - Enter a name for the new folder in the dialog box and press Enter or click outside the field to save it.
-- copy the path of uploaded files
-- Open the `notebooks/00-setup` file
-- Find "REPLACE WITH YOUR OWN PATH" Use `ctrl + f` or `cmd + f`
-- Replace to your path
-- Run the `01-Extration` and `02-Transform` files
-- Open the PowerBI
-- Open the dashboard file
-- In the initial page, click on down arrow below "Transform data"
-- Select "Edit parameters"
-- Put your Host and Path 
-    - This information is in the `03-BI` notebook ( Run the notebook to capture your Host and Path )
-- Click "Apply changes"
+## ⚙️ How to run
 
+1. **Get your data**: Request and download your extended streaming history from [Spotify](https://www.spotify.com/account/privacy/).
+2. **Upload the project**: Upload this project (files/folders) to your Databricks workspace.
+3. **Add your data**: Place the `.json` files downloaded from Spotify inside the `data/extended/` folder.
+4. **Databricks Setup**: Open the `notebooks/setup/` folder and run the `databricks.ipynb` notebook to prepare the environment.
+5. **Process the data**: Navigate to the `notebooks/history/` folder and run the notebooks in numerical order (01, 02, and 03).
+6. **Get the credentials**: Go back to the `notebooks/setup/` folder and run the `powerbi.ipynb` notebook. It will display the **Host** and **Path** fields of your cluster.
+7. **Configure the Dashboard**:
+   - Open the `powerbi/dashboard_spotify.pbix` file in Power BI Desktop on your computer.
+   - On the home page, click the arrow below **Transform Data** and select **Edit parameters**.
+   - Enter the **Host** and **Path** values captured in the previous step.
+   - Click **Apply changes**.
+8. The dashboard will load your data directly from Databricks. Enjoy!
 
-## 👨‍💻 Author <a id="authors"></a>
+## 👤 Autor
 
-### [Matheus Rodrigues](https://www.linkedin.com/in/matheus-rodrigues-mrj/)
+Matheus Rodrigues 
+[LinkedIn](https://www.linkedin.com/in/matheus-rodrigues-mrj/) | [GitHub](https://github.com/MatheusRodri)
