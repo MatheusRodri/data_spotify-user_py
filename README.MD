@@ -16,7 +16,7 @@
 - [How to run](#-how-to-run)
 - [Autor](#-autor)
 
-# 📌 Context 
+## 📌 Context 
 
 The project is an analytical dashboard focused on processing and visualizing your extended streaming history from Spotify. It is designed to run easily in the **Databricks** environment and is extremely simple to use (focused on beginners). Just import your personal data and see the magic happen through a detailed dashboard in Power BI, which displays your most played songs, favorite artists, total listening time, and much more.
 
